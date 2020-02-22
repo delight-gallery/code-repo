@@ -19,8 +19,28 @@ class OrderController extends Controller
     }
 
     //*** JSON Request
-    public function datatables($status)
+    public function datatables(Request $request,$status)
     {
+        $order = new Order;
+
+        // $form = array();
+        if (!empty($request->form)) {
+            parse_str($request->form, $form);
+        }
+        if (!empty($form['vendor'])) {
+            $order = $order->whereHas('vendororders.user', function ($query) use ($form) {
+                $query->where('users.name', 'like', "%{$form['vendor']}%");
+            });
+        }
+        if (!empty($form['orderdate'])) {
+            $order = $order->where('created_at', '>', date("Y-m-d",strtotime($form['orderdate'])));
+        }
+        if (!empty($form['orderdate'])) {
+            $order = $order->where('created_at', '>', date("Y-m-d",strtotime($form['orderdate'])));
+        }
+
+        
+        
         if($status == 'pending'){
             $datas = Order::where('status','=','pending')->get();
         }
@@ -34,7 +54,7 @@ class OrderController extends Controller
             $datas = Order::where('status','=','declined')->get();
         }
         else{
-          $datas = Order::orderBy('id','desc')->get();  
+            $datas = $order->orderBy('id','desc')->get();  
         }
          
          //--- Integrating This Collection Into Datatables
@@ -73,7 +93,8 @@ class OrderController extends Controller
     }
     public function index()
     {
-        return view('admin.order.index');
+        $categories = \App\Models\Category::all();
+        return view('admin.order.index', compact('categories'));
     }
     public function pending()
     {

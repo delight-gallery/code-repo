@@ -32,6 +32,56 @@
                             <div class="row">
                                 <div class="col-lg-12">
                                     <div class="mr-table allproduct">
+                                        <form id="search-form">
+                                            <div class="row flx">
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <input type="text" name="vendor" class="form-control" placeholder="Vendor">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <select name="category" class="form-control">
+                                                            <option value="">Category</option>
+                                                            @foreach ($categories as $category)
+                                                                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <select name="subcategory" class="form-control">
+                                                            <option value="">Sub Category</option>
+                                                        </select>
+                                                    </div>
+                                                    
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <select name="childcategory" class="form-control">
+                                                            <option value="">Child Category</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <input type="text" name="status" class="form-control" placeholder="Status">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <input type="text" name="deliverydate" class="form-control" placeholder="Delivery date">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <input type="date" name="orderdate" class="form-control" placeholder="Order date">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <input type="text" name="customer" class="form-control" placeholder="Customer">
+                                                    </div>
+                                                    
+                                                    <div class="form-group">
+                                                        <input type="text" name="invoiceno" class="form-control" placeholder="Invoice no.">
+                                                    </div>
+                                                    
+                                                    <button type="button" id="search" class="btn btn-primary float-right">Search</button>
+                                                </div>
+                                            </div>
+                                        </form>
                                         @include('includes.admin.form-success') 
                                         <div class="table-responsiv">
                                         <div class="gocover" style="background: url({{asset('assets/images/'.$gs->admin_loader)}}) no-repeat scroll center center rgba(45, 45, 45, 0.5);"></div>
@@ -142,7 +192,12 @@
                ordering: true,
                processing: true,
                serverSide: true,
-               ajax: '{{ route('admin-order-datatables','none') }}',
+               ajax:{
+                    'url':'{{ route('admin-order-datatables','none') }}',
+                    'data': function(d) {
+                        d.form = $('#search-form').serialize();
+                    }
+               },
                columns: [
                         { data: 'customer_email', name: 'customer_email' },
                         { data: 'id', name: 'id' },
@@ -150,13 +205,37 @@
                         { data: 'pay_amount', name: 'pay_amount' },
                         { data: 'action', searchable: false, orderable: false }
                      ],
-               language : {
+                language : {
                     processing: '<img src="{{asset('assets/images/'.$gs->admin_loader)}}">'
                 },
                 drawCallback : function( settings ) {
                         $('.select').niceSelect();  
                 }
             });
+
+        $('#search').on('click',function() {
+            table.draw();
+        });
+
+        $('[name=category]').on('change', function(){
+            category_id = $(this).val();
+            $.ajax({
+                url: '{{ route('admin-subcat-load','') }}/'+category_id,
+                success: function(resp) {
+                    $('[name=subcategory]').html(resp);
+                }
+            });
+        });
+
+        $('[name=subcategory]').on('change', function(){
+            category_id = $(this).val();
+            $.ajax({
+                url: '{{ route('admin-childcat-load','') }}/'+category_id,
+                success: function(resp) {
+                    $('[name=childcategory]').html(resp);
+                }
+            });
+        });
                                                                 
     </script>
 
