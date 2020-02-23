@@ -32,14 +32,24 @@ class OrderController extends Controller
                 $query->where('users.name', 'like', "%{$form['vendor']}%");
             });
         }
-        if (!empty($form['orderdate'])) {
-            $order = $order->where('created_at', '>', date("Y-m-d",strtotime($form['orderdate'])));
+        if (!empty($form['status'])) {
+            $order = $order->where('status', 'like', "%{$form['status']}%");
         }
-        if (!empty($form['orderdate'])) {
-            $order = $order->where('created_at', '>', date("Y-m-d",strtotime($form['orderdate'])));
+        if (!empty($form['orderfromdate']) && empty($form['ordertodate'])) {
+            $order = $order->whereDate('created_at', '=', date('Y-m-d',strtotime($form['orderfromdate'])));
+        } else if (!empty($form['orderfromdate']) && !empty($form['ordertodate'])) {
+            $order = $order->whereDate('created_at', '>=', date('Y-m-d',strtotime($form['orderfromdate'])));
+            $order = $order->whereDate('created_at', '<', date('Y-m-d',strtotime($form['ordertodate'])));
         }
-
-        
+        if (!empty($form['customer'])) {
+            $order = $order->whereHas('user', function ($query) use ($form) {
+                $query->where('name', 'like', "%{$form['customer']}%");
+            });
+        }
+        if (!empty($form['invoiceno'])) {
+            $form['invoiceno'] = (int)$form['invoiceno'];
+            $order = $order->where('id', '=', $form['invoiceno']);
+        }
         
         if($status == 'pending'){
             $datas = Order::where('status','=','pending')->get();

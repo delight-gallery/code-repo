@@ -192,6 +192,7 @@ Route::get('/BuyOffline/customer/{id?}', 'Admin\BuyOfflineController@getCustomer
   
   Route::get('/vendors/datatables', 'Admin\VendorController@datatables')->name('admin-vendor-datatables');
   Route::get('/vendors', 'Admin\VendorController@index')->name('admin-vendor-index');
+  Route::get('/vendors/exists', 'Admin\VendorController@exists')->name('admin-vendor-exists');
 
   Route::get('/vendors/subs/datatables', 'Admin\VendorController@subsdatatables')->name('admin-vendor-subs-datatables');
   Route::get('/vendors/subs', 'Admin\VendorController@subs')->name('admin-vendor-subs');

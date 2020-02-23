@@ -22,10 +22,48 @@ class ProductController extends Controller
     }
 
     //*** JSON Request
-    public function datatables()
+    public function datatables(Request $request)
     {
-         $datas = Product::orderBy('id','desc')->get();
          
+        $product = new Product;
+        
+        $form = array();
+        if (!empty($request->form)) {
+            parse_str($request->form, $form);
+        }
+        if (!empty($form['vendor'])) {
+            $product = $product->whereHas('user', function ($query) use ($form) {
+                $query->where('users.name', 'like', "%{$form['vendor']}%");
+            });
+        }
+        if (!empty($form['category'])) {
+            $product = $product->where('category_id', '=', $form['category']);
+        }
+        if (!empty($form['subcategory'])) {
+            $product = $product->where('subcategory_id', '=', $form['subcategory']);
+        }
+        if (!empty($form['childcategory'])) {
+            $product = $product->where('childcategory_id', '=', $form['childcategory']);
+        }
+        if (!empty($form['status']) || $form['status'] == '0') {
+            $product = $product->where('status', '=', $form['status']);
+        }
+        if (!empty($form['stockstatus'])) {
+            if ($form['stockstatus'] == 'in-stock') {
+                $product = $product->where('stock', '>', 0);
+            } else if ($form['stockstatus'] == 'out-of-stock') {
+                $product = $product->where('stock', '=', 0);
+                $product = $product->orWhereNull('stock');
+            }
+        }
+        if (!empty($form['productcondition'])) {
+            $product = $product->where('product_condition', '=', $form['productcondition']);
+        }
+        if (!empty($form['producttype'])) {
+            $product = $product->where('type', '=', $form['producttype']);
+        }
+
+        $datas = $product->orderBy('id','desc')->get();
          //--- Integrating This Collection Into Datatables
          return Datatables::of($datas)
                             ->editColumn('name', function(Product $data) {
@@ -102,7 +140,8 @@ class ProductController extends Controller
     //*** GET Request
     public function index()
     {
-        return view('admin.product.index');
+        $categories = \App\Models\Category::all();
+        return view('admin.product.index', compact('categories'));
     }
 
     //*** GET Request

@@ -44,6 +44,18 @@
 														</td>
 														<td class="quantity">
 															<span class="qttotal">{{ $product['qty'] }} </span>	
+															
+															<form method="get" action="{{ route('admin-buy-now',$product['item']['id']) }}" >
+																<span class="increase-product-quantity">
+																	<i class="icofont-plus-square"></i>
+																</span>
+																<span class="decrease-product-quantity">
+																	<i class="icofont-minus-square"></i>
+																</span>
+																<input type="hidden" name="qty" value="{{  $product['qty'] }}">
+																
+															</form>
+															
 														</td>
 														<td class="unit-price">
 															<p>{{ App\Models\Product::convertPrice($product['item']['price']) }} </p>
@@ -177,11 +189,11 @@
 
 									<div class="col-lg-6">
 										<label>{{ $langg->lang152 }} *</label>
-										<input class="form-control customer-auto-complete" type="text" name="name" placeholder="{{ $langg->lang152 }}" required="" value="{{ Auth::guard('web')->check() ? Auth::guard('web')->user()->name : '' }}">
+										<input class="form-control" type="text" name="name" placeholder="{{ $langg->lang152 }}" required="" value="{{ Auth::guard('web')->check() ? Auth::guard('web')->user()->name : '' }}">
 									</div>
 									<div class="col-lg-6">
 										<label>{{ $langg->lang153 }} *</label>
-										<input class="form-control" type="text" name="phone" placeholder="{{ $langg->lang153 }}" required="" value="{{ Auth::guard('web')->check() ? Auth::guard('web')->user()->phone : '' }}">
+										<input class="form-control customer-auto-complete" type="text" name="phone" placeholder="{{ $langg->lang153 }}" required="" value="{{ Auth::guard('web')->check() ? Auth::guard('web')->user()->phone : '' }}">
 									</div>
 									<div class="col-lg-6">
 										<label>{{ $langg->lang154 }} *</label>
@@ -248,5 +260,8 @@
 @section('scripts')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.min.js" ></script>
 <script src="{{asset('assets/admin/js/product.js')}}"></script>
+<script type="text/javascript">
+	var admin_get_customer = "{{route('admin-get-customer')}}";
+</script>
 <script src="{{asset('assets/admin/js/buy-offline.js')}}"></script>
 @endsection

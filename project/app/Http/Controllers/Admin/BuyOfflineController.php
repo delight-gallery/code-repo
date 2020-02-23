@@ -24,6 +24,7 @@ use App\Models\User;
 use App\Models\Notification;
 use App\Models\VendorOrder;
 use App\Models\UserNotification;
+use Auth;
 
 class BuyOfflineController extends Controller
 {
@@ -65,7 +66,7 @@ class BuyOfflineController extends Controller
                                 return '<div class="action-list"><select class="process select droplinks '.$class.'"><option data-val="1" value="'. route('admin-prod-status',['id1' => $data->id, 'id2' => 1]).'" '.$s.'>Activated</option><<option data-val="0" value="'. route('admin-prod-status',['id1' => $data->id, 'id2' => 0]).'" '.$ns.'>Deactivated</option>/select></div>';
                             })                             
                             ->addColumn('action', function(Product $data) {
-                                return '<div class="action-list"><a href="' . route('front.product', $data->slug) . '" target="_blank"> <i class="fas fa-edit"></i>Buy  Now</a></div>';
+                                return '<div class="action-list"><a href="' . route('admin-buy-now', $data->id) . '" target="_blank"> <i class="fas fa-edit"></i>Buy  Now</a></div>';
                             })
                             ->rawColumns(['name', 'status', 'action'])
                             ->toJson(); //--- Returning Json Data To Client Side
@@ -389,7 +390,7 @@ class BuyOfflineController extends Controller
 
  
     //*** GET Request
-    public function Buy($id)
+    public function Buy(Request $request,$id)
     {
         //Session::forget('carts');
         $cats = Category::all();
@@ -430,13 +431,25 @@ class BuyOfflineController extends Controller
         }
 
         $oldcarts = Session::has('carts') ? Session::get('carts') : null;
-        $carts = new carts($oldcarts);
+        
+        if (Auth::user()->isAdmin()) {
+            $carts = new carts(null);
+        } else {
+            $carts = new carts($oldcarts);    
+        }
+       
         //echo "<pre>";
        // print_r($carts->item['id']);die;
        // if(!$carts->items){
-           $carts->add($prod, $prod->id,$size);
+        $qty = 0;
+        if (isset($request->qty) && !empty($request->qty)) {
+            $qty = $request->qty;
+        }
+        
+        $carts->add($prod, $prod->id,$size,$qty);
        //   }
-         
+          // print_r($carts->items[$id.$size]['qty']);
+        
         if($carts->items[$id.$size]['dp'] == 1)
         {
             return 'digital';
@@ -450,7 +463,7 @@ class BuyOfflineController extends Controller
             if($carts->items[$id.$size]['qty'] > $carts->items[$id.$size]['size_qty'])
             {
                 return 0;
-            }           
+            }
         }
         Session::put('carts',$carts);
 

@@ -128,6 +128,20 @@ if(admin_loader == 1)
             $('.submit-loader').hide();
           }
       }
+
+      $('#modal1 .modal-content .modal-body').find("#geniusformdata" ).validate({
+        rules: {
+          name: {
+            required: true,
+            remote: check_vendor_name_exists_url
+          }
+        },
+        messages: {
+          name: {
+            remote: "Vendor exists"
+          }
+        }
+      });
       
     });
 });

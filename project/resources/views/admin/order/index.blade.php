@@ -1,5 +1,11 @@
 @extends('layouts.admin') 
 
+@section('styles')
+
+<link href="{{asset('assets/admin/css/jquery-ui.css')}}" rel="stylesheet" type="text/css">
+
+@endsection
+
 @section('content')  
 <style type="text/css">
     .list{
@@ -33,7 +39,7 @@
                                 <div class="col-lg-12">
                                     <div class="mr-table allproduct">
                                         <form id="search-form">
-                                            <div class="row flx">
+                                            <div class="row">
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <input type="text" name="vendor" class="form-control" placeholder="Vendor">
@@ -67,9 +73,19 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <div class="form-group">
-                                                        <input type="date" name="orderdate" class="form-control" placeholder="Order date">
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <input type="text" name="orderfromdate" class="form-control datepicker" placeholder="Order from date">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <input type="text" name="ordertodate" class="form-control datepicker" placeholder="Order to date">
+                                                            </div>
+                                                        </div>
                                                     </div>
+                                                    
                                                     <div class="form-group">
                                                         <input type="text" name="customer" class="form-control" placeholder="Customer">
                                                     </div>
@@ -216,6 +232,8 @@
         $('#search').on('click',function() {
             table.draw();
         });
+
+        $('.datepicker').datepicker({'dateFormat':'dd-mm-yy'});
 
         $('[name=category]').on('change', function(){
             category_id = $(this).val();

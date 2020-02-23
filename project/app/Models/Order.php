@@ -12,4 +12,9 @@ class Order extends Model
     {
         return $this->hasMany('App\Models\VendorOrder');
     }
+
+    public function user()
+    {
+    	return $this->hasOne('App\Models\User','id','user_id');
+    }
 }

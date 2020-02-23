@@ -1,5 +1,15 @@
 @extends('layouts.admin') 
 
+@section('styles')
+
+<style type="text/css">
+#modal1 .modal-content .modal-body label.error {
+  color: red;
+}
+</style>
+
+@endsection
+
 @section('content')  
 					<input type="hidden" id="headerdata" value="VENDOR">
 					<div class="content-area">
@@ -39,6 +49,19 @@
 
 
 									<div class="mr-table allproduct">
+										<form id="search-form">
+				                          	<div class="row">
+				                              <div class="col-md-4">
+				                                  <div class="form-group">
+				                                      <select name="status" class="form-control">
+				                                        <option value="">Select Status</option>
+				                                        <option value="1">In active</option>
+				                                        <option value="2">Active</option>
+				                                      </select>
+				                                  </div>
+				                              	</div>
+				                          	</div>
+				                      	</form>
 										@include('includes.admin.form-success') 
 										<div class="table-responsiv">
 												<table id="geniustable" class="table table-hover dt-responsive" cellspacing="0" width="100%">
@@ -200,13 +223,21 @@
 
 {{-- DATA TABLE --}}
 
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.1/dist/jquery.validate.js"></script>
     <script type="text/javascript">
+
+    	var check_vendor_name_exists_url = '{{route('admin-vendor-exists')}}';
 
 		var table = $('#geniustable').DataTable({
 			   ordering: false,
                processing: true,
                serverSide: true,
-               ajax: '{{ route('admin-vendor-datatables') }}',
+               ajax:{
+                    'url':'{{ route('admin-vendor-datatables') }}',
+                    'data': function(d) {
+                        d.form = $('#search-form').serialize();
+                    }
+               },
                columns: [
                         { data: 'shop_name', name: 'shop_name' },
                         { data: 'email', name: 'email' },
@@ -221,6 +252,10 @@
 	    				$('.select').niceSelect();	
 				}
             });
+
+		$("[name=status]").on('change',function(){
+			table.draw();
+		});
 
 	    				$('.select1').niceSelect();	
 	    				$(function() {

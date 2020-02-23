@@ -23,9 +23,17 @@ class VendorController extends Controller
     }
 
 	    //*** JSON Request
-	    public function datatables()
+	    public function datatables(Request $request)
 	    {
-	        $datas = User::where('is_vendor','=',2)->orWhere('is_vendor','=',1)->orderBy('id','desc')->get();
+            $form = array();
+            if (!empty($request->form)) {
+                parse_str($request->form, $form);
+            }
+            if (isset($form['status']) && ($form['status'] == '2' || $form['status'] == '1')) {
+                $datas = User::where('is_vendor','=',$form['status'])->orderBy('id','desc')->get();
+            } else {
+	            $datas = User::where('is_vendor','=',2)->orWhere('is_vendor','=',1)->orderBy('id','desc')->get();
+            }
 	         //--- Integrating This Collection Into Datatables
 	         return Datatables::of($datas)
                                 ->addColumn('status', function(User $data) {
@@ -136,6 +144,7 @@ class VendorController extends Controller
     public function store(Request $request)
     {
         $rules = [
+                'name'   => 'required|unique:users',
                 'email'   => 'required|email|unique:users'
                 ];
         $validator = Validator::make(Input::all(), $rules);
@@ -310,6 +319,17 @@ class VendorController extends Controller
             $msg = 'Withdraw Rejected Successfully.';
             return response()->json($msg);      
             //--- Redirect Section Ends   
+        }
+
+        public function exists(Request $request)
+        {
+            if (!empty($request->name)) {
+                if (User::where('name','=',$request->name)->exists()) {
+                    return response()->json(false);
+                } else {
+                    return response()->json(true);
+                }
+            }
         }
 
 }

@@ -20,7 +20,7 @@
                                </div>
                           </div>
                           <div class="col-lg-7">
-                            <input type="text" class="input-field" name="name" placeholder="Enter Name" required="" value="">
+                            <input type="text" class="input-field" name="name" placeholder="Enter Name" required="" value="" data-remote="http://google.com">
                           </div>
                         </div>
                         <div class="row">
@@ -46,11 +46,21 @@
                         <div class="row">
                           <div class="col-lg-4">
                             <div class="left-area">
-                                <h4 class="heading">GST *</h4>
+                                <h4 class="heading">GST </h4>
                                </div>
                           </div>
                           <div class="col-lg-7">
-                            <input type="text" class="input-field" name="gst" placeholder="Enter GST" required value="">
+                            <input type="text" class="input-field" name="gst" placeholder="Enter GST" value="">
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-lg-4">
+                            <div class="left-area">
+                                <h4 class="heading">Invoice Address </h4>
+                               </div>
+                          </div>
+                          <div class="col-lg-7">
+                            <input type="text" class="input-field" name="invoice_address" placeholder="Enter Invoice Address" value="">
                           </div>
                         </div>
                         <div class="row">
