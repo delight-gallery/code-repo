@@ -3,18 +3,21 @@
 @section('styles')
 
 <link href="{{asset('assets/admin/css/jquery-ui.css')}}" rel="stylesheet" type="text/css">
+<style type="text/css">
+  .dataTables_filter{
+    display: none;
+  }
+  .list{
+    display: none;
+  }
+  .process::after{
+    display: none;
+  }
+</style>
 
 @endsection
 
 @section('content')  
-<style type="text/css">
-    .list{
-        display: none;
-    }
-    .process::after{
-        display: none;
-    }
-</style>
                     <div class="content-area">
                         <div class="mr-breadcrumb">
                             <div class="row">

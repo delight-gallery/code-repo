@@ -206,6 +206,17 @@
 							</li>
 
 							<li>
+								<a href="#report" class="accordion-toggle wave-effect" data-toggle="collapse" aria-expanded="false">
+									<i class="icofont-ui-user-group"></i>Report
+								</a>
+								<ul class="collapse list-unstyled" id="report" data-parent="#accordion">
+									<li>
+										<a href="{{ route('admin-report-payment') }}"><span>Payment Report</span></a>
+									</li>
+								</ul>
+							</li>
+
+							<li>
 								<a href="{{ route('admin-subscription-index') }}" class=" wave-effect"><i class="fas fa-dollar-sign"></i>Vendor Subscription Plans</a>
 							</li>
 

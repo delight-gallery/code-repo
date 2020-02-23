@@ -560,6 +560,9 @@ Route::get('/subscription/delete/{id}', 'Admin\SubscriptionController@destroy')-
 
   //------------ STAFF SECTION ENDS------------
 
+  Route::get('/report/payment', 'Admin\ReportController@payment')->name('admin-report-payment');
+  Route::get('/report/payment/datatables', 'Admin\ReportController@datatables')->name('report-payment-datatables');
+  
 
 });
   //------------ ADMIN SUBSCRIBERS SECTION ------------

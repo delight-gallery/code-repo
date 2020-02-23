@@ -4,6 +4,7 @@
 <link href="{{asset('assets/admin/css/product.css')}}" rel="stylesheet"/>
 <link href="{{asset('assets/admin/css/jquery.Jcrop.css')}}" rel="stylesheet"/>
 <link href="{{asset('assets/admin/css/Jcrop-style.css')}}" rel="stylesheet"/>
+<link href="{{asset('assets/admin/css/jquery-ui.css')}}" rel="stylesheet" type="text/css">
 
 @endsection
 @section('content')
@@ -295,6 +296,17 @@
 							                              <input type="checkbox" name="seo_check" class="checkclick" id="allowProductSEO" value="1">
 							                              <label for="allowProductSEO">Allow Product SEO</label>
 							                            </div>
+													</div>
+												</div>
+
+												<div class="row">
+													<div class="col-lg-4">
+														<div class="left-area">
+															<h4 class="heading">Delivery Date</h4>
+														</div>
+													</div>
+													<div class="col-lg-7">
+														<input  name="delivery_date" type="text" class="input-field datepicker" placeholder="Enter Delivery Date">
 													</div>
 												</div>
 

@@ -31,7 +31,8 @@
         });
 
         // Product Measure Ends :)
-
+        $('.datepicker').datepicker({'dateFormat':'dd-mm-yy'});
+        
 	});
 
 // TAGIT

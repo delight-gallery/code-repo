@@ -120,6 +120,16 @@
                         <div class="row">
                           <div class="col-lg-4">
                             <div class="left-area">
+                                <h4 class="heading">Invoice Address </h4>
+                               </div>
+                          </div>
+                          <div class="col-lg-7">
+                            <input type="text" class="input-field" name="invoice_address" placeholder="Enter Invoice Address" value="{{ $data->invoice_address }}">
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-lg-4">
+                            <div class="left-area">
                                 <h4 class="heading">Registration Document *</h4>
                                </div>
                           </div>

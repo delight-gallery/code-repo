@@ -381,6 +381,7 @@ class ProductController extends Controller
              $input['price'] = ($input['price'] / $sign->value);
              $input['previous_price'] = ($input['previous_price'] / $sign->value);    
 
+             $input['delivery_date'] = date("Y-m-d",strtotime($input['delivery_date']));
             // Save Data 
                 $data->fill($input)->save();
 
@@ -610,6 +611,7 @@ class ProductController extends Controller
          $input['price'] = $input['price'] / $sign->value;
          $input['previous_price'] = $input['previous_price'] / $sign->value; 
 
+         $input['delivery_date'] = date("Y-m-d",strtotime($input['delivery_date']));
 
          $data->update($input);
         //-- Logic Section Ends

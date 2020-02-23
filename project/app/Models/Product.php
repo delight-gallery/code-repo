@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Session;
 class Product extends Model
 {
 
-    protected $fillable = ['user_id','category_id', 'subcategory_id', 'childcategory_id', 'name', 'photo', 'size','size_qty','size_price', 'color', 'details','price','tax','previous_price','stock','policy','status', 'views','tags','featured','best','top','hot','latest','big','trending','sale','features','colors','product_condition','ship','meta_tag','meta_description','youtube','type','file','license','license_qty','link','platform','region','licence_type','measure','discount_date','is_discount'];
+    protected $fillable = ['user_id','category_id', 'subcategory_id', 'childcategory_id', 'name', 'photo', 'size','size_qty','size_price', 'color', 'details','price','tax','previous_price','stock','policy','status', 'views','tags','featured','best','top','hot','latest','big','trending','sale','features','colors','product_condition','ship','meta_tag','meta_description','youtube','type','file','license','license_qty','link','platform','region','licence_type','measure','discount_date','is_discount','delivery_date'];
 
     public static function filterProducts($collection)
     {

@@ -1,5 +1,15 @@
 @extends('layouts.admin') 
 
+@section('styles')
+
+<style type="text/css">
+  .dataTables_filter{
+    display: none;
+  }
+</style>
+
+@endsection
+
 @section('content')  
 					<input type="hidden" id="headerdata" value="PRODUCT">
 					<div class="content-area">

@@ -66,7 +66,7 @@ class BuyOfflineController extends Controller
                                 return '<div class="action-list"><select class="process select droplinks '.$class.'"><option data-val="1" value="'. route('admin-prod-status',['id1' => $data->id, 'id2' => 1]).'" '.$s.'>Activated</option><<option data-val="0" value="'. route('admin-prod-status',['id1' => $data->id, 'id2' => 0]).'" '.$ns.'>Deactivated</option>/select></div>';
                             })                             
                             ->addColumn('action', function(Product $data) {
-                                return '<div class="action-list"><a href="' . route('admin-buy-now', $data->id) . '" target="_blank"> <i class="fas fa-edit"></i>Buy  Now</a></div>';
+                                return '<div class="action-list"><a href="' . route('admin-buy-now', $data->id) . '"> <i class="fas fa-edit"></i>Buy  Now</a></div>';
                             })
                             ->rawColumns(['name', 'status', 'action'])
                             ->toJson(); //--- Returning Json Data To Client Side
