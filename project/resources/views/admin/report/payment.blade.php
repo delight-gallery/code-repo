@@ -2,9 +2,13 @@
 
 @section('styles')
 
+<link href="{{asset('assets/admin/css/jquery-ui.css')}}" rel="stylesheet" type="text/css">
 <style type="text/css">
-
+  .dataTables_filter{
+    display: none;
+  }
 </style>
+
 
 @endsection
 
@@ -32,14 +36,40 @@
 							<div class="row">
 								<div class="col-lg-12">
 									<div class="mr-table allproduct">
+										<form id="search-form">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <input type="text" name="fromdate" class="form-control datepicker" placeholder="From date">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <input type="text" name="todate" class="form-control datepicker" placeholder="To date">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                	<div class="row">
+                                                    	<button type="button" id="search" class="btn btn-primary float-right">Search</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
 										@include('includes.admin.form-success') 
 										<div class="table-responsiv">
 												<table id="geniustable" class="table table-hover dt-responsive" cellspacing="0" width="100%">
 													<thead>
 														<tr>
+														  <th>Vendor</th>
 		                                                  <th>Order No</th>
+		                                                  <th>Invoice No</th>
+		                                                  <th>Customer</th>
 		                                                  <th>Payment Amount</th>
-		                                                  <th>Order Method</th>
+		                                                  <th>Payment Method</th>
 		                                                  <th>Order Date</th>
 		                                                  <th>Payment Status</th>
 														</tr>
@@ -72,7 +102,10 @@
                     }
                },
                columns: [
+                        { data: 'vendor', name: 'vendor' },
                         { data: 'order_number', name: 'order_number' },
+                        { data: 'invoice_number', name: 'invoice_number' },
+                        { data: 'customer', name: 'customer' },
                         { data: 'pay_amount', name: 'pay_amount' },
                         { data: 'method', name: 'method' },
                         { data: 'created_at', name: 'created_at' },
@@ -86,9 +119,11 @@
 				}
             });
 
-		$("[name=status]").on('change',function(){
-			table.draw();
-		});
+		$('#search').on('click',function() {
+            table.draw();
+        });
+
+		$('.datepicker').datepicker({'dateFormat':'dd-mm-yy'});
 
 		$('.select1').niceSelect();	
 	    															
