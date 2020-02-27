@@ -92,4 +92,34 @@ class ReportController extends Controller
                             ->toJson(); //--- Returning Json Data To Client Side
     }
 
+    public function download()
+    {
+        // $order = new Order;
+        
+        // $order->with('vendororders');
+        // $order->with('user');
+        
+        // $order->where('pay_amount','>',0);
+
+        // if (!empty($request->form)) {
+        //     parse_str($request->form, $form);
+        // }
+        // // print_r($form);
+        // if (empty($form['fromdate']) && empty($form['todate'])) {
+        //     $order = $order->whereRaw('MONTH(created_at) = ?',[date('m')]);
+        // } else {
+        //     if (!empty($form['fromdate']) && empty($form['todate'])) {
+        //         $order = $order->whereRaw('DATE(created_at) >= ?', [date('Y-m-d',strtotime($form['fromdate']))]);
+        //     } else if (!empty($form['fromdate']) && !empty($form['todate'])) {
+        //         $order = $order->whereDate('created_at', '>=', date('Y-m-d',strtotime($form['fromdate'])));
+        //         $order = $order->whereDate('created_at', '<=', date('Y-m-d',strtotime($form['todate'])));
+        //     }
+        // }
+        
+
+        // $datas = $order->orderBy('id','desc')->get();
+        //  //--- Integrating This Collection Into Datatables
+         
+    }
+
 }

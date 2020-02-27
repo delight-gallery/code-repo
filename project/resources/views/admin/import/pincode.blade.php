@@ -17,16 +17,16 @@
 						<div class="mr-breadcrumb">
 							<div class="row">
 								<div class="col-lg-12">
-										<h4 class="heading">Payment</h4>
+										<h4 class="heading">Pincode</h4>
 										<ul class="links">
 											<li>
 												<a href="{{ route('admin.dashboard') }}">Dashboard </a>
 											</li>
 											<li>
-												<a href="javascript:;">Report</a>
+												<a href="javascript:;">Import</a>
 											</li>
 											<li>
-												<a href="{{ route('admin-report-payment') }}">Payment</a>
+												<a href="{{ route('admin-import-pincode') }}">Pincode</a>
 											</li>
 										</ul>
 								</div>
@@ -36,27 +36,24 @@
 							<div class="row">
 								<div class="col-lg-12">
 									<div class="mr-table allproduct">
-										<form id="search-form">
+										<form method="post" id="search-form" action="{{ route('admin-pincode-excel') }}" enctype="multipart/form-data">
+											{{ csrf_field() }}
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="row">
                                                         <div class="col-md-6">
                                                             <div class="form-group">
-                                                                <input type="text" name="fromdate" class="form-control datepicker" placeholder="From date">
+                                                            	<label>Choose excel file</label>
+                                                                <input type="file" name="excel" class="form-control">
                                                             </div>
                                                         </div>
-                                                        <div class="col-md-6">
-                                                            <div class="form-group">
-                                                                <input type="text" name="todate" class="form-control datepicker" placeholder="To date">
-                                                            </div>
-                                                        </div>
+                                                        
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                 	<div class="row">
-                                                    	<button type="button" id="search" class="btn btn-primary float-right">Search</button>
+                                                    	<button type="submit" class="btn btn-primary float-right">Import</button>
                                                     </div>
-                                                    	<a style="float:right !important;" href="{{ route('report-payment-download') }}" id="download-excel" class="btn btn-dark">Download Excel</a>
                                                 </div>
                                             </div>
                                         </form>
@@ -65,14 +62,8 @@
 												<table id="geniustable" class="table table-hover dt-responsive" cellspacing="0" width="100%">
 													<thead>
 														<tr>
-														  <th>Vendor</th>
-		                                                  <th>Order No</th>
-		                                                  <th>Invoice No</th>
-		                                                  <th>Customer</th>
-		                                                  <th>Payment Amount</th>
-		                                                  <th>Payment Method</th>
-		                                                  <th>Order Date</th>
-		                                                  <th>Payment Status</th>
+														  <th>Pincode</th>
+		                                                  
 														</tr>
 													</thead>
 												</table>
@@ -97,40 +88,21 @@
                processing: true,
                serverSide: true,
                ajax:{
-                    'url':'{{ route('report-payment-datatables') }}',
+                    'url':'{{ route('admin-pincode-datatables') }}',
                     'data': function(d) {
-                        d.form = $('#search-form').serialize();
+                        // d.form = $('#search-form').serialize();
                     }
                },
                columns: [
-                        { data: 'vendor', name: 'vendor' },
-                        { data: 'order_number', name: 'order_number' },
-                        { data: 'invoice_number', name: 'invoice_number' },
-                        { data: 'customer', name: 'customer' },
-                        { data: 'pay_amount', name: 'pay_amount' },
-                        { data: 'method', name: 'method' },
-                        { data: 'created_at', name: 'created_at' },
-                        { data: 'payment_status', name: 'payment_status' },
+                        { data: 'pincode', name: 'pincode' },
                      ],
                language : {
                 	processing: '<img src="{{asset('assets/images/'.$gs->admin_loader)}}">'
                 },
 				drawCallback : function( settings ) {
-	    				$('.select').niceSelect();	
 				}
             });
 
-		$('#search').on('click',function() {
-            table.draw();
-        });
-
-		$('.datepicker').datepicker({'dateFormat':'dd-mm-yy'});
-
-		$('.select1').niceSelect();	
-
-		$('#download-excel').on('click',function() {
-
-		});
 	    															
     </script>
 

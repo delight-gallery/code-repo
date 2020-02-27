@@ -215,6 +215,16 @@
 									</li>
 								</ul>
 							</li>
+							<li>
+								<a href="#import" class="accordion-toggle wave-effect" data-toggle="collapse" aria-expanded="false">
+									<i class="icofont-ui-user-group"></i>Import
+								</a>
+								<ul class="collapse list-unstyled" id="import" data-parent="#accordion">
+									<li>
+										<a href="{{ route('admin-import-pincode') }}"><span>Import Pincode</span></a>
+									</li>
+								</ul>
+							</li>
 
 							<li>
 								<a href="{{ route('admin-subscription-index') }}" class=" wave-effect"><i class="fas fa-dollar-sign"></i>Vendor Subscription Plans</a>

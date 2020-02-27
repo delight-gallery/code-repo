@@ -550,6 +550,11 @@ Route::get('/subscription/delete/{id}', 'Admin\SubscriptionController@destroy')-
   Route::get('/products/popular/{id}','Admin\SeoToolController@popular')->name('admin-prod-popular');
   //------------ ADMIN SEOTOOL SETTINGS SECTION ------------
 
+  Route::get('/import/pincode','Admin\ImportExcelController@index')->name('admin-import-pincode');
+  Route::get('/import/pincode/datatables','Admin\ImportExcelController@datatables')->name('admin-pincode-datatables');
+  
+  Route::post('/import/pincode/excel','Admin\ImportExcelController@import')->name('admin-pincode-excel');
+
   //------------ STAFF SECTION ------------
   Route::get('/staff/datatables', 'Admin\StaffController@datatables')->name('admin-staff-datatables');
   Route::get('/staff', 'Admin\StaffController@index')->name('admin-staff-index');
@@ -562,6 +567,8 @@ Route::get('/subscription/delete/{id}', 'Admin\SubscriptionController@destroy')-
 
   Route::get('/report/payment', 'Admin\ReportController@payment')->name('admin-report-payment');
   Route::get('/report/payment/datatables', 'Admin\ReportController@datatables')->name('report-payment-datatables');
+  Route::get('/report/payment/download', 'Admin\ReportController@download')->name('report-payment-download');
+  
   
 
 });
