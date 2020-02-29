@@ -8,6 +8,7 @@ use App\Models\Product;
 use App\Models\Category;
 use App\Models\Currency;
 use App\Models\Gallery;
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Input;
@@ -33,7 +34,7 @@ class ProductController extends Controller
         }
         if (!empty($form['vendor'])) {
             $product = $product->whereHas('user', function ($query) use ($form) {
-                $query->where('users.name', 'like', "%{$form['vendor']}%");
+                $query->where('users.shop_name', 'like', "%{$form['vendor']}%");
             });
         }
         if (!empty($form['category'])) {
@@ -141,7 +142,8 @@ class ProductController extends Controller
     public function index()
     {
         $categories = \App\Models\Category::all();
-        return view('admin.product.index', compact('categories'));
+         $vendors = User::where('is_vendor','=',2)->orWhere('is_vendor','=',1)->orderBy('id','desc')->get();
+        return view('admin.product.index', compact('categories','vendors'));
     }
 
     //*** GET Request

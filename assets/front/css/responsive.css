@@ -205,7 +205,7 @@ nav .menu li a{
   .top-header .right-content {
     display: flex;
     justify-content: space-between;
-    width: 100%;
+    /* width: 100%; */
   }
 
   .top-header .right-content .logo-mobile{

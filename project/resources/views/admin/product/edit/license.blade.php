@@ -352,7 +352,28 @@
 													</div>
 												</div>
 
-
+                                                <div class="row">
+													<div class="col-lg-4">
+														<div class="left-area">
+															<h4 class="heading">Cancel Hrs</h4>
+														</div>
+													</div>
+													<div class="col-lg-7">
+														<input  name="cancel_hr" type="text" class="input-field datepicker" placeholder="Enter Cancellation time" value="{{$data->cancel_hr}}" required>
+													</div>
+												</div>
+												
+													<div class="row">
+													<div class="col-lg-4">
+														<div class="left-area">
+															<h4 class="heading">Return Date</h4>
+														</div>
+													</div>
+													<div class="col-lg-7">
+														<input  name="return_date" type="text" class="input-field datepicker" placeholder="Enter Return Date"  value="{{$data->return_date}}"required>
+													</div>
+												</div>
+												
 
 						                        <div class="{{ ($data->meta_tag == null && strip_tags($data->meta_description) == null) ? "showbox":"" }}">
 						                          <div class="row">

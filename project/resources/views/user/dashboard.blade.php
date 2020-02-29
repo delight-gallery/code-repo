@@ -21,6 +21,9 @@
                 <h5 class="title">{{ $user->name }}</h5>
                 <ul class="list">
                   <li>
+                    <p><img src="{{ $user->photo ? asset('assets/images/users/'.$user->photo):asset('assets/images/noimage.png') }}" class="img-responsive" width="50%"></p>
+                  </li>
+                  <li>
                     <p><span class="user-title">{{ $langg->lang209 }}:</span> {{ $user->email }}</p>
                   </li>
                   @if($user->phone != null)
@@ -48,9 +51,9 @@
                     <p><span class="user-title">{{ $langg->lang214 }}:</span> {{ $user->address }}</p>
                   </li>
                   @endif
-                  <li>
+                  <!-- <li>
                     <p><span class="user-title">{{ $langg->lang215 }}:</span> {{ App\Models\Product::vendorConvertPrice($user->affilate_income) }}</p>
-                  </li>
+                  </li> -->
                 </ul>
               </div>
             </div>

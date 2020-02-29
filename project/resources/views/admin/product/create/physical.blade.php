@@ -452,7 +452,29 @@
 														<input  name="delivery_date" type="text" class="input-field datepicker" placeholder="Enter Delivery Date">
 													</div>
 												</div>
-
+                                         	<div class="row">
+													<div class="col-lg-4">
+														<div class="left-area">
+															<h4 class="heading">Cancel Hrs</h4>
+														</div>
+													</div>
+													<div class="col-lg-7">
+														<input  name="cancel_hr" type="text" class="input-field datepicker" placeholder="Enter Delivery Date" required>
+													</div>
+												</div>
+												
+													<div class="row">
+													<div class="col-lg-4">
+														<div class="left-area">
+															<h4 class="heading">Return Date</h4>
+														</div>
+													</div>
+													<div class="col-lg-7">
+														<input  name="return_date" type="text" class="input-field datepicker" placeholder="Enter Delivery Date" required>
+													</div>
+												</div>
+												
+												
 
 						                        <div class="showbox">
 						                          <div class="row">

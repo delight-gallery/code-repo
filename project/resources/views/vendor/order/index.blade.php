@@ -24,6 +24,65 @@
                             <div class="row">
                                 <div class="col-lg-12">
                                     <div class="mr-table allproduct">
+                                        <form id="search-form">
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    
+                                                    <div class="form-group">
+                                                        <select name="category" class="form-control">
+                                                            <option value="">Category</option>
+                                                            @foreach ($categories as $category)
+                                                                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <select name="subcategory" class="form-control">
+                                                            <option value="">Sub Category</option>
+                                                        </select>
+                                                    </div>
+                                                    
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <select name="childcategory" class="form-control">
+                                                            <option value="">Child Category</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <input type="text" name="status" class="form-control" placeholder="Status">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <input type="text" name="deliverydate" class="form-control datepicker" placeholder="Delivery date">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <input type="text" name="orderfromdate" class="form-control datepicker" placeholder="Order from date">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <input type="text" name="ordertodate" class="form-control datepicker" placeholder="Order to date">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <div class="form-group">
+                                                        <input type="text" name="customer" class="form-control" placeholder="Customer">
+                                                    </div>
+                                                    
+                                                    <div class="form-group">
+                                                        <input type="text" name="invoiceno" class="form-control" placeholder="Invoice no.">
+                                                    </div>
+                                                    
+                                                    <button type="button" id="search" class="btn btn-primary float-right">Search</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                            
                                         @include('includes.form-success') 
 
                                         <div class="table-responsiv">
@@ -135,6 +194,17 @@
 @section('scripts')
 
 {{-- DATA TABLE --}}
+<script type="text/javascript">
+
+       
+        $('.datepicker').datepicker({'dateFormat':'dd-mm-yy'});
+
+        
+
+        
+                                                                
+    </script>
+
 
     <script type="text/javascript">
 

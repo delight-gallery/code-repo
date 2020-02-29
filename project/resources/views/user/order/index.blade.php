@@ -11,7 +11,7 @@
 						<div class="order-history">
 							<div class="header-area">
 								<h4 class="title">
-									Purchased Items
+									My Orders
 								</h4>
 							</div>
 							<div class="mr-table allproduct mt-4">
@@ -43,7 +43,7 @@
 														</td>
 														<td>
 															<a href="{{route('user-order',$order->id)}}">
-																	VIEW ORDER
+																	<button class="btn btn-sm btn-primary">VIEW ORDER</button>
 															</a>
 														</td>
 													</tr>

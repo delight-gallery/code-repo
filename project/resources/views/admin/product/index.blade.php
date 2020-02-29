@@ -40,7 +40,12 @@
                           <div class="row">
                               <div class="col-md-4">
                                   <div class="form-group">
-                                      <input type="text" name="vendor" class="form-control" placeholder="Vendor">
+                                     <select name="vendor" class="form-control">
+                                                            <option value="">Vendor</option>
+                                                            @foreach ($vendors as $vendor)
+                                                                <option value="{{ $vendor->shop_name }}">{{ $vendor->shop_name }}</option>
+                                                            @endforeach
+                                                        </select>
                                   </div>
                                   <div class="form-group">
                                       <select name="category" class="form-control">

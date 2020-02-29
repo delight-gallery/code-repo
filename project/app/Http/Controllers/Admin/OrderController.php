@@ -29,7 +29,7 @@ class OrderController extends Controller
         }
         if (!empty($form['vendor'])) {
             $order = $order->whereHas('vendororders.user', function ($query) use ($form) {
-                $query->where('users.name', 'like', "%{$form['vendor']}%");
+                $query->where('users.shop_name', 'like', "%{$form['vendor']}%");
             });
         }
         if (!empty($form['status'])) {
@@ -62,6 +62,9 @@ class OrderController extends Controller
         }
         elseif($status == 'declined') {
             $datas = Order::where('status','=','declined')->get();
+        }
+        elseif($status == 'cancel') {
+            $datas = Order::where('status','=','cancel')->get();
         }
         else{
             $datas = $order->orderBy('id','desc')->get();  
@@ -104,7 +107,8 @@ class OrderController extends Controller
     public function index()
     {
         $categories = \App\Models\Category::all();
-        return view('admin.order.index', compact('categories'));
+        $vendors = User::where('is_vendor','=',2)->orWhere('is_vendor','=',1)->orderBy('id','desc')->get();
+        return view('admin.order.index', compact('categories','vendors'));
     }
     public function pending()
     {

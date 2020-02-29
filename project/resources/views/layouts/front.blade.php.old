@@ -119,8 +119,6 @@
 	                        					<a href="{{ route('user-package') }}" class="sell-btn">{{ $langg->lang220 }}</a>
 	                        				@endif
 										</li>
-										<li><a href="{{ route('user-dashboard') }}">My Account</a></li>
-										<li><a href="{{ route('user-logout') }}">Logout</a></li>
                         				@else
 										<li>
 											<!-- <a href="javascript:;" data-toggle="modal" data-target="#vendor-login" class="sell-btn">{{ $langg->lang220 }}</a> -->
@@ -196,7 +194,7 @@
 		<div class="container">
 			<div class="row ">
 				
-				<div class="col-lg-7 col-sm-12 remove-padding order-last order-sm-2 order-md-2">
+				<div class="col-lg-6 col-sm-12 remove-padding order-last order-sm-2 order-md-2">
 					<div class="search-box">
 						<div class="categori-container">
 							<select id="category_select" class="categoris">
@@ -218,9 +216,12 @@
 					</div>
 				</div>
 
+				<div class="col-lg-4 col-sm-6">
 
-				<div class="col-lg-3 col-sm-6 col-5 remove-padding">
-					<div class="logo">
+				</div>
+
+				<div class="col-lg-4 col-sm-6 col-5 remove-padding">
+					<div class="logo text-center">
 						<a href="{{ route('front.index') }}">
 							<img src="{{asset('assets/images/'.$gs->logo)}}" alt="">
 						</a>
@@ -228,7 +229,7 @@
 				</div>
 
 
-				<div class="col-lg-2 col-sm-6 col-7 remove-padding order-lg-last">
+				<div class="col-lg-4 col-sm-6 col-7 remove-padding order-lg-last">
 					<!-- <div class="search-box">
 						
 						<form class="search-form" action="{{ route('front.search') }}" method="GET">
@@ -425,7 +426,7 @@
 					 -->
 					 <nav class="navbar navbar-expand-lg navbar-light bg-none">
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span> 
+    <span class="navbar-toggler-icon"></span> Categories
   </button>
   <div class="collapse navbar-collapse" id="navbarText">
     <ul class="navbar-nav mr-auto">
@@ -857,7 +858,7 @@
                 <div class="login-area signup-area">
                     <div class="login-form signup-form">
                        @include('includes.admin.form-login')
-                        <form class="mregisterform" action="{{route('user-register-submit')}}" method="POST" enctype="multipart/form-data">
+                        <form class="mregisterform" action="{{route('user-register-submit')}}" method="POST">
                           {{ csrf_field() }}
 
                           <div class="row">
@@ -919,27 +920,6 @@
                                 <i class="icofont-opencart"></i>
                             </div>
                            	</div>
-<div class="col-lg-6">
-
- <div class="form-input">
-                                <input type="text" class="User Name" name="gst_number" placeholder="GST Number" required="">
-                                <i class="icofont-opencart"></i>
-                            </div>
-                           	</div>
-
-                           	<div class="col-lg-6">
-
- <div class="form-input">
- 	<input type="file" class="User Name" name="registration_details" placeholder="Registration Details" />
- 
-                                
-                                <i class="icofont-opencart"></i>
-                            </div>
-                           	</div>
-
-
-
-
                            <div class="col-lg-6">
 
 <div class="form-input">

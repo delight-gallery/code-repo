@@ -25,8 +25,67 @@
 							<div class="row">
 								<div class="col-lg-12">
 									<div class="mr-table allproduct">
+										 <form id="search-form">
+                          <div class="row">
+                              <div class="col-md-4">
+                                <div class="form-group">
+                                      <select name="category" class="form-control">
+                                          <option value="">Category</option>
+                                          @foreach ($categories as $category)
+                                              <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                          @endforeach
+                                      </select>
+                                  </div>
+                                  <div class="form-group">
+                                      <select name="subcategory" class="form-control">
+                                          <option value="">Sub Category</option>
+                                      </select>
+                                  </div>
+                                  
+                              </div>
+                              <div class="col-md-4">
+                                  <div class="form-group">
+                                      <select name="childcategory" class="form-control">
+                                          <option value="">Child Category</option>
+                                      </select>
+                                  </div>
+                                  <div class="form-group">
+                                      <select name="status" class="form-control">
+                                        <option value="">Select Status</option>
+                                        <option value="0">In active</option>
+                                        <option value="1">Active</option>
+                                      </select>
+                                  </div>
+                                  <div class="form-group">
+                                      <select name="stockstatus" class="form-control">
+                                        <option value="">Stock Status</option>
+                                        <option value="in-stock">In Stock</option>
+                                        <option value="out-of-stock">Out of Stock</option>
+                                      </select>
+                                  </div>
+                              </div>
+                              <div class="col-md-4">
+                                  <div class="form-group">
+                                      <select name="productcondition" class="form-control">
+                                        <option value="">Product Condition</option>
+                                        <option value="2">New</option>
+                                        <option value="1">Old</option>
+                                      </select>
+                                  </div>
+                                  <div class="form-group">
+                                      <select name="producttype" class="form-control">
+                                        <option value="">Product Type</option>
+                                        <option value="Physical">Physical</option>
+                                        <option value="License">License</option>
+                                      </select>
+                                  </div>
+                                  <button type="button" id="search" class="btn btn-primary float-right">Search</button>
+                              </div>
+                          </div>
+                      </form>
+  								
 
-                        @include('includes.vendor.form-success')  
+                                       @include('includes.vendor.form-success')  
 
 										<div class="table-responsiv">
 												<table id="geniustable" class="table table-hover dt-responsive" cellspacing="0" width="100%">

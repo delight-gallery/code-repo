@@ -136,6 +136,7 @@
                                     <th>Color</th>
                                     <th>Price</th>
                                     <th>Total</th>
+									 <th>Action</th>
                                 </tr>
                                 </thead>
 										<tbody>
@@ -176,6 +177,11 @@
                                             <td><span style="width: 40px; height: 20px; display: block; border: 10px solid {{$product['color'] == "" ? "white" : $product['color']}};"></span></td>
                                             <td>{{$order->currency_sign}}{{round($product['item']['price'] * $order->currency_value,2)}}</td>
                                             <td>{{$order->currency_sign}}{{round($product['price'] * $order->currency_value,2)}}</td>
+									  <td>
+									  <button>Cancel</button>
+                                      <button>Return</button>
+                                      </td>
+                                           		
 
                                     </tr>
                                 @endforeach

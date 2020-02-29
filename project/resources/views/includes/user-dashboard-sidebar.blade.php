@@ -38,25 +38,25 @@
 
               <li class="{{ $link == route('user-orders') ? 'active':'' }}">
                 <a href="{{ route('user-orders') }}">
-                  {{ $langg->lang201 }}
+                  <!-- {{ $langg->lang201 }} --> My Orders
                 </a>
               </li>
 
               @if($gs->is_affilate == 1)
 
-                <li class="{{ $link == route('user-affilate-code') ? 'active':'' }}">
+                <!-- <li class="{{ $link == route('user-affilate-code') ? 'active':'' }}">
                     <a href="{{ route('user-affilate-code') }}">{{ $langg->lang202 }}</a>
-                </li>
+                </li> -->
 
-                <li class="{{ $link == route('user-wwt-index') ? 'active':'' }}">
+               <!--  <li class="{{ $link == route('user-wwt-index') ? 'active':'' }}">
                     <a href="{{route('user-wwt-index')}}">{{ $langg->lang203 }}</a>
-                </li>
+                </li> -->
 
               @endif
 
-               <li class="{{ $link == route('user-orders') ? 'active':'' }}">
+               <!-- <li class="{{ $link == route('user-orders') ? 'active':'' }}">
                   <a href="{{ route('user-orders') }}">Order History</a>
-              </li>
+              </li> -->
 
               <li class="{{ $link == route('user-favorites') ? 'active':'' }}">
                   <a href="{{route('user-favorites')}}">{{ $langg->lang231 }}</a>
