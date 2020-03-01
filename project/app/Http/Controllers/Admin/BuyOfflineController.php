@@ -1013,4 +1013,214 @@ class BuyOfflineController extends Controller
             ],411);
         }
     }
+
+    public function order()
+    {
+        $gateways = PaymentGateway::where('status','=',1)->get();
+        $pickups = Pickup::all();
+        $oldcarts = Session::get('carts');
+        $gs = Generalsetting::findOrFail(1);
+        $carts = new carts($oldcarts);
+        $products = $carts->items;
+
+        if ($gs->multiple_shipping == 1) {
+            $user = null;
+            if (!empty($carts->items)) {
+                foreach ($carts->items as $prod) {
+                        $user[] = $prod['item']['user_id'];
+                }
+            }
+            $ship  = 0;
+            if (!empty($user)) {
+                $users = array_unique($user);
+                if (!empty($users)) {
+                    foreach ($users as $user) {
+                        if ($user != 0) {
+                            $nship = User::findOrFail($user);
+                            $ship += $nship->shipping_cost;
+                        } else {
+                            $ship  += $gs->ship;
+                        }
+                   }
+                }
+            }
+        } else {
+            $ship  = $gs->ship;
+        }
+        $total = $carts->totalPrice;
+        $coupon = Session::has('coupon') ? Session::get('coupon') : 0;
+        if($gs->tax != 0)
+        {
+            $tax = ($total / 100) * $gs->tax;
+            $total = $total + $tax;
+        }
+        if(!Session::has('coupon_total'))
+        {
+        $total = $total - $coupon;     
+        $total = $total + $ship;               
+        }
+        else {
+        $total = Session::get('coupon_total');  
+        $total = $total + round($ship * $curr->value, 2); 
+        }
+        $ck = 1;              
+
+        if (Session::has('currency')) {
+            $curr = Currency::find(Session::get('currency'));
+        } else {
+            $curr = Currency::where('is_default','=',1)->first();
+        }
+
+        $available_products = Product::orderBy('name','asc')->where('user_id','=',0)->get();
+
+        return view('admin.buyoffline.order', ['products' => $carts->items, 'totalPrice' => $total, 'pickups' => $pickups, 'totalQty' => $carts->totalQty, 'gateways' => $gateways, 'shipping_cost' => $ship, 'checked' => $ck,'digital'=>0, 'curr' => $curr,'available_products'=>$available_products]);
+    }
+
+    public function addToCart(Request $request)
+    {
+        // Add to cart
+        if ($request->product) {
+
+            $id = $request->product;
+            //Session::forget('carts');
+            $cats = Category::all();
+            $data = Product::findOrFail($id);
+
+            $sign = Currency::where('is_default','=',1)->first();
+            
+            //newly added code
+            $prod = Product::where('id','=',$id)->first(['id','user_id','slug','name','photo','size','size_qty','size_price','color','price','stock','type','file','link','license','license_qty','measure']);
+            if(!empty($prod->license_qty))
+            {
+            $lcheck = 1;
+                foreach($prod->license_qty as $ttl => $dtl)
+                {
+                    if($dtl < 1)
+                    {
+                        $lcheck = 0;
+                    }
+                    else
+                    {
+                        $lcheck = 1;
+                        break;
+                    }                    
+                }
+                    if($lcheck == 0)
+                    {
+                        return [
+                            'status'=>false,
+                        ];           
+                    }
+            }
+            $size = '';
+            if(!empty($prod->size))
+            { 
+            $size = $prod->size[0];
+            }  
+
+            if($prod->user_id != 0){
+            $gs = Generalsetting::findOrFail(1);
+            $prc = $prod->price + $gs->fixed_commission + ($prod->price/100) * $gs->percentage_commission ;
+            $prod->price = round($prc,2);
+            }
+
+            $oldcarts = Session::has('carts') ? Session::get('carts') : null;
+            
+            
+            $carts = new carts($oldcarts); 
+            //echo "<pre>";
+           // print_r($carts->item['id']);die;
+           // if(!$carts->items){
+            $qty = 0;
+            if (isset($request->qty) && !empty($request->qty)) {
+                $qty = $request->qty;
+            }
+            
+            $carts->add($prod, $prod->id,$size,$qty);
+           //   }
+              // print_r($carts->items[$id.$size]['qty']);
+            
+            if ($carts->items[$id.$size]['dp'] == 1) {
+                return [
+                    'status'=>false,
+                ];
+            }
+            if ($carts->items[$id.$size]['stock'] < 0) {
+                return [
+                    'status'=> false,
+                    'error'=> 'Stock not available'
+                ];
+            }
+            if (!empty($carts->items[$id.$size]['size_qty'])) {
+                if ($carts->items[$id.$size]['qty'] > $carts->items[$id.$size]['size_qty']) {
+                        return [
+                            'status'=>false,
+                        ];
+                }
+            }
+            Session::put('carts',$carts);
+
+            // Added to cart
+        }
+
+        $gateways = PaymentGateway::where('status','=',1)->get();
+        $pickups = Pickup::all();
+        $oldcarts = Session::get('carts');
+        $gs = Generalsetting::findOrFail(1);
+        $carts = new carts($oldcarts);
+        $products = $carts->items;
+
+        if ($gs->multiple_shipping == 1) {
+            $user = null;
+            foreach ($carts->items as $prod) {
+                    $user[] = $prod['item']['user_id'];
+            }
+            $ship  = 0;
+            $users = array_unique($user);
+            if (!empty($users)) {
+                foreach ($users as $user) {
+                    if ($user != 0) {
+                        $nship = User::findOrFail($user);
+                        $ship += $nship->shipping_cost;
+                    } else {
+                        $ship  += $gs->ship;
+                    }
+               }
+            }
+        } else {
+            $ship  = $gs->ship;
+        }
+        $total = $carts->totalPrice;
+        $coupon = Session::has('coupon') ? Session::get('coupon') : 0;
+        if($gs->tax != 0)
+        {
+            $tax = ($total / 100) * $gs->tax;
+            $total = $total + $tax;
+        }
+        if(!Session::has('coupon_total'))
+        {
+        $total = $total - $coupon;     
+        $total = $total + $ship;               
+        }
+        else {
+        $total = Session::get('coupon_total');  
+        $total = $total + round($ship * $curr->value, 2); 
+        }
+        $ck = 1;              
+
+        if (Session::has('currency')) {
+            $curr = Currency::find(Session::get('currency'));
+        } else {
+            $curr = Currency::where('is_default','=',1)->first();
+        }
+
+        $available_products = Product::orderBy('name','asc')->where('user_id','=',0)->get();
+
+        $view = view('admin.buyoffline.order-cart-ajax', ['products' => $carts->items, 'totalPrice' => $total, 'pickups' => $pickups, 'totalQty' => $carts->totalQty, 'gateways' => $gateways, 'shipping_cost' => $ship, 'checked' => $ck,'digital'=>0, 'curr' => $curr,'available_products'=>$available_products])->render();
+
+        return [
+            'status'=> true,
+            'response'=> $view
+        ];
+    }
 }

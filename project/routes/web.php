@@ -6,7 +6,8 @@ Route::prefix('admin')->group(function() {
    Route::get('/BuyOffline/datatables', 'Admin\BuyOfflineController@datatables')->name('admin-buyoff-datatables'); //JSON REQUEST
  
   Route::get('/BuyOffline', 'Admin\BuyOfflineController@index')->name('admin-offline-buy'); //JSON REQUEST
-
+  Route::get('/BuyOffline/order', 'Admin\BuyOfflineController@order')->name('admin-offline-order'); //JSON REQUEST
+  Route::post('/BuyOffline/addToCart', 'Admin\BuyOfflineController@addToCart')->name('admin.buyoffline.addtocart'); //JSON REQUEST
 
     Route::get('/BuyOffline/buy/{id}', 'Admin\BuyOfflineController@Buy')->name('admin-buy-now');  
   
