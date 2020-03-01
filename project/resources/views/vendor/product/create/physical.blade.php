@@ -312,7 +312,7 @@
 													<div class="col-lg-4">
 														<div class="left-area">
 															<h4 class="heading">
-																Product Current Price*
+																Selling Price*
 															</h4>
 															<p class="sub-heading">
 																(In {{$sign->name}})
@@ -327,7 +327,7 @@
 												<div class="row">
 													<div class="col-lg-4">
 														<div class="left-area">
-																<h4 class="heading">Product Previous Price*</h4>
+																<h4 class="heading">Original Price*</h4>
 																<p class="sub-heading">(Optional)</p>
 														</div>
 													</div>

@@ -104,7 +104,7 @@
                                                 <option data-val="pending" {{ $order->status == 'pending' ? 'selected' : '' }} value="{{ route('admin-order-status',['id1' => $order->id, 'status' => 'pending']) }}" >Pending</option>
                                                 <option data-val="processing" {{ $order->status == 'processing' ? 'selected' : '' }} value="{{ route('admin-order-status',['id1' => $order->id, 'status' => 'processing']) }}" >Processing</option>
                                                 <option data-val="completed" {{ $order->status == 'completed' ? 'selected' : '' }} value="{{ route('admin-order-status',['id1' => $order->id, 'status' => 'completed']) }}" >Completed</option>
-                                                <option data-val="declined" {{ $order->status == 'declined' ? 'selected' : '' }} value="{{ route('admin-order-status',['id1' => $order->id, 'status' => 'declined']) }}" >Declined</option>
+                                                <option data-val="declined" {{ $order->status == 'declined' ? 'selected' : '' }} value="{{ route('admin-order-status',['id1' => $order->id, 'status' => 'declined']) }}" >Cancelled</option>
                                             </select>
                                             <a href="{{ route('admin-order-invoice',$order->id) }}" class="mybtn1"><i class="fas fa-eye"></i> View Invoice</a>
                                         </div>

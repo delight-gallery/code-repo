@@ -1,3 +1,4 @@
+
 									@if(Session::has('cart'))
 										<div class="dropdownmenu-wrapper">
 												<div class="dropdown-cart-header">
@@ -7,9 +8,9 @@
 														</span> {{ $langg->lang4 }}
 													</span>
 
-													<a class="view-cart" href="{{ route('front.cart') }}">
+													<!-- <a class="view-cart" href="{{ route('front.cart') }}">
 													{{ $langg->lang5 }}
-													</a>
+													</a> -->
 												</div><!-- End .dropdown-cart-header -->
 												<ul class="dropdown-cart-products">
 													@foreach(Session::get('cart')->items as $product)
@@ -46,6 +47,10 @@
 														</span>
 												</div><!-- End .dropdown-cart-total -->
 
+												<div class="dropdown-cart-action">
+														<a href="{{ route('front.cart') }}" class="mybtn1">{{ $langg->lang5 }}</a>
+												</div>
+												
 												<div class="dropdown-cart-action">
 														<a href="{{ route('front.checkout') }}" class="mybtn1">{{ $langg->lang7 }}</a>
 												</div><!-- End .dropdown-cart-total -->

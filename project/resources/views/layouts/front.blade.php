@@ -527,11 +527,11 @@
 						</h4>
 						<div class="footer-contant" bis_skin_checked="1">
                             <ul>
-                                <li><a href="#" bis_skin_checked="1">My Profile</a></li>
-                                <li><a href="#" bis_skin_checked="1">Track order</a></li>
-                                <li><a href="#" bis_skin_checked="1">My order</a></li>
-                                <li><a href="#" bis_skin_checked="1">Address Book</a></li>
-                                <li><a href="#" bis_skin_checked="1">Gift Vouchers</a></li>
+                                <li><a href="{{ route('user-profile') }}" bis_skin_checked="1">Cart</a></li>
+                                <li><a href="{{ route('user-wishlists') }}" bis_skin_checked="1">Wishlist</a></li>
+                                <li><a href="{{ route('user-orders') }}" bis_skin_checked="1">My order</a></li>
+                                <li><a href="{{route('user-favorites')}}" bis_skin_checked="1">Favorite Sellers</a></li>
+                                <li><a href="{{ route('user-profile') }}" bis_skin_checked="1">My Profile</a></li>
                             </ul>
                         </div>
 						<!-- <ul class="link-list">
