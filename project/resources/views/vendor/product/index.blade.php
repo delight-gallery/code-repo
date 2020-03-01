@@ -23,7 +23,7 @@
 						</div>
 						<div class="product-area">
 							<div class="row">
-								<div class="col-lg-12">
+								<div class="col-lg-12"> 
 									<div class="mr-table allproduct">
 										 <form id="search-form">
                           <div class="row">

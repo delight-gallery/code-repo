@@ -912,7 +912,7 @@ Route::prefix('vendor')->group(function() {
   Route::get('/carts/view','Front\CartController@cartview');
   Route::get('/carts/','Front\CartController@cart')->name('front.cart');
   Route::get('/addcart/{id}','Front\CartController@addcart')->name('product.cart.add');
-  Route::get('/addnumcart','Front\CartController@addnumcart');
+  Route::get('/addnumcart','Front\CartController@addnumcart')->name('addnumcart');
   Route::get('/addbyone','Front\CartController@addbyone');
   Route::get('/reducebyone','Front\CartController@reducebyone');
   Route::get('/upcolor','Front\CartController@upcolor');

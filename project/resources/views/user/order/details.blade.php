@@ -143,18 +143,20 @@
                                 @foreach($cart->items as $product)
                                     <tr>
                                             <td>{{ $product['item']['id'] }}</td>
-                                            <td>
-                                                <input type="hidden" value="{{ $product['license'] }}">
+                                            <td>{{$product['item']['name']}}
+                                                <!-- <input type="hidden" value="{{ $product['license'] }}">
                                                 @if($product['item']['user_id'] != 0)
                                                 @php
                                                 $user = App\Models\User::find($product['item']['user_id']);
                                                 @endphp
+
                                                 @if(isset($user))
                                               <a target="_blank" href="{{ route('front.product', $product['item']['slug']) }}">{{strlen($product['item']['name']) > 30 ? substr($product['item']['name'],0,30).'...' : $product['item']['name']}}</a>
                                                 @else
                                                 <a href="javascript:;">{{strlen($product['item']['name']) > 30 ? substr($product['item']['name'],0,30).'...' : $product['item']['name']}}</a>
                                                 @endif
                                                 @endif
+
                                                 @if($product['item']['type'] != 'Physical')
                                                 @if($order->payment_status == 'Completed')
                                                     @if($product['item']['file'] != null)
@@ -170,7 +172,8 @@
                               <a href="javascript:;" data-toggle="modal" data-target="#confirm-delete" class="btn btn-sm btn-info product-btn" id="license"><i class="fa fa-eye"></i> View License</a>                                                
                                                 @endif
                                                 @endif
-                                                @endif
+                                                @endif -->
+                                                {{$product['item']['tax']}}
                                             </td>
                                             <td>{{$product['qty']}} {{ $product['item']['measure'] }}</td>
                                             <td>{{$product['size']}}</td>
