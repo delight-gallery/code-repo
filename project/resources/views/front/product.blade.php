@@ -509,7 +509,15 @@
     </div> -->
 </div>
     </div>
-</div></div>
+    <div style="display: block; background: #ffffba; border-radius: 50px; padding: 8px 8px; font-size: 12px;
+    text-align: center;">
+      <span style="color: #e53333">{{ $productt->ship }}</span>
+      <span style="color: #e53333">Day/s</span>
+      <span style="color: #e53333">estimated delivery</span>
+    </div>
+</div>
+
+</div>
 
 
 <div class="row">
