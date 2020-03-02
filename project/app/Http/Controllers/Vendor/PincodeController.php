@@ -74,6 +74,7 @@ class PincodeController extends Controller
         $groupPincode->pincodes = implode(",", $request->pincodes);
         $groupPincode->group_name = $request->group_name;
         $groupPincode->shipping_cost = $request->shipping_cost;
+        $groupPincode->user_id = Auth::user()->id;
         $groupPincode->save();
 
         
