@@ -173,6 +173,9 @@
 								<a href="{{ route('admin-offline-buy') }}"><i class="fas fa-language"></i>Buy Offline</a>
 							</li>
 							<li>
+								<a href="{{ route('admin-offline-order') }}"><i class="fas fa-language"></i>Offline Order</a>
+							</li>
+							<li>
 								<a href="#menu3" class="accordion-toggle wave-effect" data-toggle="collapse" aria-expanded="false">
 									<i class="icofont-user"></i>Customers
 								</a>

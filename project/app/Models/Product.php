@@ -347,4 +347,18 @@ class Product extends Model
         return $tags;
     }
 
+    public static function shippingCost($user_id, $pincode) {
+
+        $user = \DB::table('pincode_groups')
+        ->where('user_id', $user_id)
+        ->whereRaw("pincodes REGEXP '[[:<:]]". $pincode ."[[:>:]]'")->get()
+        ->first();
+
+        if (!empty($user) && $pincode!=0) {
+            return $user->shipping_cost;
+        } else {
+            return 0;
+        }
+
+    }
 }

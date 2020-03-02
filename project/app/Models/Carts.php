@@ -24,15 +24,13 @@ class Carts extends Model
     public function add($item, $id, $size, $qty = 0) {
         $size_cost = 0;
         $storedItem = ['qty' => $qty,'size_key' => 0, 'size_qty' =>  $item->size_qty,'size_price' => $item->size_price, 'size' => $item->size, 'color' => $item->color, 'stock' => $item->stock, 'price' => $item->price, 'item' => $item, 'license' => '', 'dp' => '0'];
-        if($item->type == 'Physical')
-        {
+        if($item->type == 'Physical') {
             if ($this->items) {
                 if (array_key_exists($id.$size, $this->items)) {
                     $storedItem = $this->items[$id.$size];
                 }
-            }            
-        }
-        else {
+            }
+        } else {
             if ($this->items) {
                 if (array_key_exists($id.$size, $this->items)) {
                     $storedItem = $this->items[$id.$size];
@@ -61,6 +59,9 @@ class Carts extends Model
         if($item->color != null){ 
         $storedItem['color'] = $item->color[0];
         } 
+        if ($qty != 0) { 
+            $storedItem['qty'] = $qty;
+        }
         $item->price += $size_cost;
         $storedItem['price'] = $item->price * $storedItem['qty'];
         $this->items[$id.$size] = $storedItem;

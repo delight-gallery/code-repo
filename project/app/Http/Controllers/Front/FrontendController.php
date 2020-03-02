@@ -476,18 +476,21 @@ class FrontendController extends Controller
     }
  public function checkPincode(Request $request){
 
-     $user=  DB::table('users')->where('id',$request->user_id)->whereRaw("pin_code REGEXP '[[:<:]]".$request->pincode."[[:>:]]'")->get()->first(); 
-     if(empty($user))
-        {
+        $user = DB::table('pincode_groups')
+        ->where('user_id',$request->user_id)
+        ->whereRaw("pincodes REGEXP '[[:<:]]".$request->pincode."[[:>:]]'")->get()
+        ->first();
 
-         return 1;exit;
+        if (empty($user)) {
+                return 1;
+                exit;
+        } else {
+            $product_arr[$request->product_id] = $request->pincode;
+            Session::put('product_pincode', $product_arr);
+            return 0;
+            exit;
         }
-        else{
-            
-            return 0;exit;   
-        }
-        
-       
+
     } 
 
 }

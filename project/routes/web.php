@@ -6,7 +6,8 @@ Route::prefix('admin')->group(function() {
    Route::get('/BuyOffline/datatables', 'Admin\BuyOfflineController@datatables')->name('admin-buyoff-datatables'); //JSON REQUEST
  
   Route::get('/BuyOffline', 'Admin\BuyOfflineController@index')->name('admin-offline-buy'); //JSON REQUEST
-
+  Route::get('/BuyOffline/order', 'Admin\BuyOfflineController@order')->name('admin-offline-order'); //JSON REQUEST
+  Route::post('/BuyOffline/addToCart', 'Admin\BuyOfflineController@addToCart')->name('admin.buyoffline.addtocart'); //JSON REQUEST
 
     Route::get('/BuyOffline/buy/{id}', 'Admin\BuyOfflineController@Buy')->name('admin-buy-now');  
   
@@ -800,7 +801,7 @@ Route::prefix('vendor')->group(function() {
   Route::get('/profile', 'Vendor\VendorController@profile')->name('vendor-profile'); 
   Route::post('/profile', 'Vendor\VendorController@profileupdate')->name('vendor-profile-update');
 
-  Route::post('/pincodeUpdate', 'Vendor\VendorController@pincodeUpdate')->name('vendor-pincode-update'); 
+
   // Vendor Profile Ends
 
   // Vendor Shipping Cost   
@@ -809,8 +810,6 @@ Route::prefix('vendor')->group(function() {
   // Vendor Shipping Cost   
   Route::get('/banner', 'Vendor\VendorController@banner')->name('vendor-banner');
 
-   // Vendor Shipping Cost   
-  Route::get('/pincode', 'Vendor\VendorController@pincode')->name('vendor-pincode');
 
   // Vendor Social   
   Route::get('/social', 'Vendor\VendorController@social')->name('vendor-social-index');
@@ -828,6 +827,14 @@ Route::prefix('vendor')->group(function() {
   Route::get('/service/edit/{id}', 'Vendor\ServiceController@edit')->name('vendor-service-edit');
   Route::post('/service/edit/{id}', 'Vendor\ServiceController@update')->name('vendor-service-update');  
   Route::get('/service/delete/{id}', 'Vendor\ServiceController@destroy')->name('vendor-service-delete'); 
+
+  Route::get('/pincode/datatables', 'Vendor\PincodeController@datatables')->name('vendor-pincode-datatables');
+  Route::get('/pincode', 'Vendor\PincodeController@index')->name('vendor-pincode-index');
+  Route::get('/pincode/create', 'Vendor\PincodeController@create')->name('vendor-pincode-create');
+  Route::post('/pincode/create', 'Vendor\PincodeController@store')->name('vendor-pincode-store');
+  Route::get('/pincode/edit/{id}', 'Vendor\PincodeController@edit')->name('vendor-pincode-edit');
+  Route::post('/pincode/edit', 'Vendor\PincodeController@store')->name('vendor-pincode-update');  
+  Route::get('/pincode/delete/{id}', 'Vendor\PincodeController@destroy')->name('vendor-pincode-delete'); 
 
   });
 

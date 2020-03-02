@@ -901,6 +901,7 @@
     var token =$("#crf_token").val();
    var pincode = $("#check_avail").val();
    var user_id = <?php echo $productt->user_id;?>;
+   var product_id = $('#product_id').val();
    if(pincode){
     $.ajax({
       
@@ -908,7 +909,7 @@
       url: "{{URL::to('/frond/checkPincode')}}",
       data: {
         '_token': $('input[name=_token]').val(),
- 
+        'product_id': product_id,
         'pincode': pincode,
         'user_id': user_id
       },

@@ -40,6 +40,7 @@
                       <th>{{ $langg->lang123 }}</th>
                       <th>{{ $langg->lang124 }}</th>
                       <th>{{ $langg->lang125 }}</th>
+                      <!-- <th>Shipping Cost</th> -->
                       <th>{{ $langg->lang126 }}</th>
                       <th><i class="icofont-close-squared-alt"></i></th>
                     </tr>
@@ -112,9 +113,25 @@
                           {{ App\Models\Product::convertPrice($product['item']['price']) }}                       
                         </p>
                       </td>
+                      <!-- <td class="unit-price">
+                        <p>
+                          <?php 
+                            $product_pincodes = Session::get('product_pincode');
+                            $product_pincode = 0;
+                            if (isset($product_pincodes[$product['item']['id']] ) )
+                              $product_pincode = $product_pincodes[$product['item']['id']];
+                          
+                              $shipping_cost = App\Models\Product::shippingCost($product['item']['user_id'], $product_pincode);
+                              echo $shipping_cost;
+                          ?>
+                          
+                        </p>
+                      </td> -->
                       <td class="total-price">
                         <p id="prc{{$product['item']['id'].$product['size']}}">
-                          {{ App\Models\Product::convertPrice($product['price']) }}                 
+                          {{ 
+                            App\Models\Product::convertPrice($product['price'])
+                          }}                 
                         </p>
                       </td>
                       <td>

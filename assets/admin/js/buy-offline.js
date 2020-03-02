@@ -67,14 +67,14 @@ $(document).ready(function(e){
 
     $('.increase-product-quantity').on('click',function(){
         quantity = parseInt($(this).parent().find('[name=qty]').val());
-        $(this).parent().find('[name=qty]').val(quantity);
+        $(this).parent().find('[name=qty]').val(quantity+1);
         $(this).closest('form').submit();
     });
 
     $('.decrease-product-quantity').on('click',function(){
         quantity = parseInt($(this).parent().find('[name=qty]').val());
         if (quantity > 1) {
-            quantity = quantity - 2;
+            quantity = quantity - 1;
             $(this).parent().find('[name=qty]').val(quantity);
             $(this).closest('form').submit();
         }
