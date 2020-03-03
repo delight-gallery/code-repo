@@ -7,6 +7,7 @@
 				<th>{{ $langg->lang140 }}</th>
 				<th>{{ $langg->lang141 }}</th>
 				<th>{{ $langg->lang142 }}</th>
+				<th></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -50,6 +51,11 @@
 				</td>
 				<td class="total-price">
 					<p>{{ App\Models\Product::convertPrice($product['price']) }} </p>
+				</td>
+				<td>
+					<span class="delete-product btn btn-danger btn-sm">
+						Delete
+					</span>
 				</td>
 			</tr>
 		@endforeach

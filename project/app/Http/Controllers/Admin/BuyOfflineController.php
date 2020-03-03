@@ -446,7 +446,7 @@ class BuyOfflineController extends Controller
             $qty = $request->qty;
         }
         
-        $carts->add($prod, $prod->id,$size,$qty);
+        $carts->add($prod, $prod->id,$size);
        //   }
           // print_r($carts->items[$id.$size]['qty']);
         
@@ -1136,7 +1136,7 @@ class BuyOfflineController extends Controller
                 $qty = $request->qty;
             }
             
-            $carts->add($prod, $prod->id,$size,$qty);
+            $carts->add($prod, $prod->id,$size);
            //   }
               // print_r($carts->items[$id.$size]['qty']);
             
@@ -1223,4 +1223,43 @@ class BuyOfflineController extends Controller
             'response'=> $view
         ];
     }
+
+    public function removeFromCart(Request $request) {
+        if ($request->product) {
+
+            $oldcarts = Session::has('carts') ? Session::get('carts') : null;
+            $carts = new carts($oldcarts); 
+
+            $id = $request->product;
+
+            $prod = Product::where('id','=',$id)->first(['id','user_id','slug','name','photo','size','size_qty','size_price','color','price','stock','type','file','link','license','license_qty','measure']);
+            if ($prod->user_id != 0) {
+                $gs = Generalsetting::findOrFail(1);
+                $prc = $prod->price + $gs->fixed_commission + ($prod->price/100) * $gs->percentage_commission ;
+                $prod->price = round($prc,2);
+            }
+
+            $carts->reducing($prod, $request->product, 1, "");
+            Session::put('carts',$carts);
+
+            return [
+                'status'=> true
+            ];
+        }
+    }
+
+    public function removeItem(Request $request) {
+        if ($request->product) {
+            $oldcarts = Session::has('carts') ? Session::get('carts') : null;
+            $carts = new carts($oldcarts); 
+            $carts->removeItem($request->product);
+            Session::put('carts',$carts);
+        }
+    }
+
+    public function removeAllItem() {
+        $carts = new carts(null); 
+        Session::put('carts',$carts);
+    }
+
 }

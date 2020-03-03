@@ -8,6 +8,10 @@ Route::prefix('admin')->group(function() {
   Route::get('/BuyOffline', 'Admin\BuyOfflineController@index')->name('admin-offline-buy'); //JSON REQUEST
   Route::get('/BuyOffline/order', 'Admin\BuyOfflineController@order')->name('admin-offline-order'); //JSON REQUEST
   Route::post('/BuyOffline/addToCart', 'Admin\BuyOfflineController@addToCart')->name('admin.buyoffline.addtocart'); //JSON REQUEST
+  Route::post('/BuyOffline/removeFromCart', 'Admin\BuyOfflineController@removeFromCart')->name('admin.buyoffline.removefromcart'); //JSON REQUEST
+  
+  Route::post('/BuyOffline/removeItem', 'Admin\BuyOfflineController@removeItem')->name('admin.buyoffline.removeitem'); //JSON REQUEST
+  Route::get('/BuyOffline/removeAllItem', 'Admin\BuyOfflineController@removeAllItem')->name('admin.buyoffline.delete-all-product'); //JSON REQUEST
 
     Route::get('/BuyOffline/buy/{id}', 'Admin\BuyOfflineController@Buy')->name('admin-buy-now');  
   

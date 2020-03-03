@@ -120,6 +120,9 @@
 									</div>
 									<div class="col-md-4">
 										<input class="btn btn-primary" type="button" id="add-product-to-cart" value="Add Product">
+										<span class="delete-all-product btn btn-danger">
+											Clear All
+										</span>
 									</div>
 								</div>
 							</form>
@@ -134,6 +137,7 @@
 												<th>{{ $langg->lang140 }}</th>
 												<th>{{ $langg->lang141 }}</th>
 												<th>{{ $langg->lang142 }}</th>
+												<th></th>
 											</tr>
 										</thead>
 										<tbody>
@@ -178,6 +182,11 @@
 												</td>
 												<td class="total-price">
 													<p>{{ App\Models\Product::convertPrice($product['price']) }} </p>
+												</td>
+												<td>
+													<span class="delete-product btn btn-danger btn-sm">
+														Delete
+													</span>
 												</td>
 											</tr>
 										@endforeach
@@ -347,12 +356,12 @@
 	        form_data = $(this).closest('form').serialize();
 	        form_data['qty'] = quantity;
 			$.ajax({
-				url:'{{ route("admin.buyoffline.addtocart") }}',
+				url:'{{ route("admin.buyoffline.removefromcart") }}',
 				data:form_data,
 				type:"POST",
 				success:function(resp){
 					if (resp.status) {
-						$('#add-to-cart-response').html(resp.response);	
+						window.location.reload();
 					} else {
 						alert(resp.error);
 					}
@@ -361,6 +370,34 @@
 		}
 
     });
+
+    $(document).on('click','.delete-product',function(){
+
+        form_data = $(this).closest('tr').find('form').serialize();
+        $.ajax({
+			url:'{{ route("admin.buyoffline.removeitem") }}',
+			data:form_data,
+			type:"POST",
+			success:function(resp){
+				window.location.reload();
+			}
+		})
+		
+    });
+
+    $(document).on('click','.delete-all-product',function(){
+
+        $.ajax({
+			url:'{{ route("admin.buyoffline.delete-all-product") }}',
+			type:"GET",
+			success:function(resp){
+				window.location.reload();
+			}
+		})
+		
+    });
+
+    
 
     $(document).on('click','#payment-submit-btn', function(){
     	$('#pay-btn').click();
