@@ -571,9 +571,11 @@ Route::get('/subscription/delete/{id}', 'Admin\SubscriptionController@destroy')-
   //------------ STAFF SECTION ENDS------------
 
   Route::get('/report/payment', 'Admin\ReportController@payment')->name('admin-report-payment');
+  Route::get('/report/pending-payment', 'Admin\PendingReportController@payment')->name('admin-report-pending-payment');
   Route::get('/report/payment/datatables', 'Admin\ReportController@datatables')->name('report-payment-datatables');
+  Route::get('/report/pending-payment/datatables', 'Admin\PendingReportController@datatables')->name('report-pending-payment-datatables');
    Route::get('/report/payment/download', 'Admin\ReportController@download')->name('report-payment-download');
-  
+  Route::get('/report/pending-payment/download', 'Admin\PendingReportController@download')->name('report-pending-payment-download');
 
 });
   //------------ ADMIN SUBSCRIBERS SECTION ------------
