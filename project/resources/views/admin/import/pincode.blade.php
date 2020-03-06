@@ -45,6 +45,10 @@
                                                             <div class="form-group">
                                                             	<label>Choose excel file</label>
                                                                 <input type="file" name="excel" class="form-control">
+                                                                <br>
+                                                                <a href="{{ url('assets/admin/pincode-sample.xlsx') }}">
+                                                                	Click to download sample excel file
+                                                                </a>
                                                             </div>
                                                         </div>
                                                         
