@@ -6,13 +6,13 @@ Route::prefix('admin')->group(function() {
    Route::get('/BuyOffline/datatables', 'Admin\BuyOfflineController@datatables')->name('admin-buyoff-datatables'); //JSON REQUEST
  
   Route::get('/BuyOffline', 'Admin\BuyOfflineController@index')->name('admin-offline-buy'); //JSON REQUEST
-  Route::get('/BuyOffline/order', 'Admin\BuyOfflineController@order')->name('admin-offline-order'); //JSON REQUEST
+Route::get('/BuyOffline/order', 'Admin\BuyOfflineController@order')->name('admin-offline-order'); //JSON REQUEST
   Route::post('/BuyOffline/addToCart', 'Admin\BuyOfflineController@addToCart')->name('admin.buyoffline.addtocart'); //JSON REQUEST
-  Route::post('/BuyOffline/removeFromCart', 'Admin\BuyOfflineController@removeFromCart')->name('admin.buyoffline.removefromcart'); //JSON REQUEST
+Route::post('/BuyOffline/removeFromCart', 'Admin\BuyOfflineController@removeFromCart')->name('admin.buyoffline.removefromcart'); //JSON REQUEST
   
   Route::post('/BuyOffline/removeItem', 'Admin\BuyOfflineController@removeItem')->name('admin.buyoffline.removeitem'); //JSON REQUEST
   Route::get('/BuyOffline/removeAllItem', 'Admin\BuyOfflineController@removeAllItem')->name('admin.buyoffline.delete-all-product'); //JSON REQUEST
-
+  
     Route::get('/BuyOffline/buy/{id}', 'Admin\BuyOfflineController@Buy')->name('admin-buy-now');  
   
   Route::post('/Offlinedelivery', 'Admin\BuyOfflineController@cashondelivery')->name('Offline.submit'); 
@@ -571,9 +571,11 @@ Route::get('/subscription/delete/{id}', 'Admin\SubscriptionController@destroy')-
   //------------ STAFF SECTION ENDS------------
 
   Route::get('/report/payment', 'Admin\ReportController@payment')->name('admin-report-payment');
+  Route::get('/report/pending-payment', 'Admin\PendingReportController@payment')->name('admin-report-pending-payment');
   Route::get('/report/payment/datatables', 'Admin\ReportController@datatables')->name('report-payment-datatables');
+  Route::get('/report/pending-payment/datatables', 'Admin\PendingReportController@datatables')->name('report-pending-payment-datatables');
    Route::get('/report/payment/download', 'Admin\ReportController@download')->name('report-payment-download');
-  
+  Route::get('/report/pending-payment/download', 'Admin\PendingReportController@download')->name('report-pending-payment-download');
 
 });
   //------------ ADMIN SUBSCRIBERS SECTION ------------
@@ -786,8 +788,14 @@ Route::prefix('vendor')->group(function() {
   Route::post('/gallery/store', 'Vendor\GalleryController@store')->name('vendor-gallery-store');  
   Route::get('/gallery/delete', 'Vendor\GalleryController@destroy')->name('vendor-gallery-delete'); 
 
-  //------------ VENDOR GALLERY SECTION ENDS------------
+  //------------ VENDOR REPORT  SECTION ENDS------------
 
+  
+  Route::get('/report/payment', 'Vendor\ReportController@payment')->name('vendor-report-payment');
+  Route::get('/report/payment/datatables', 'Vendor\ReportController@datatables')->name('vendor-report-payment-datatables');
+   Route::get('/report/payment/download', 'Vendor\ReportController@download')->name('vendor-report-payment-download');
+  
+  
 
   //------------ VENDOR NOTIFICATION SECTION ------------
 
@@ -805,7 +813,7 @@ Route::prefix('vendor')->group(function() {
   Route::get('/profile', 'Vendor\VendorController@profile')->name('vendor-profile'); 
   Route::post('/profile', 'Vendor\VendorController@profileupdate')->name('vendor-profile-update');
 
-
+  Route::post('/pincodeUpdate', 'Vendor\VendorController@pincodeUpdate')->name('vendor-pincode-update'); 
   // Vendor Profile Ends
 
   // Vendor Shipping Cost   
@@ -814,6 +822,8 @@ Route::prefix('vendor')->group(function() {
   // Vendor Shipping Cost   
   Route::get('/banner', 'Vendor\VendorController@banner')->name('vendor-banner');
 
+   // Vendor Shipping Cost   
+  Route::get('/pincode', 'Vendor\VendorController@pincode')->name('vendor-pincode');
 
   // Vendor Social   
   Route::get('/social', 'Vendor\VendorController@social')->name('vendor-social-index');
@@ -831,8 +841,7 @@ Route::prefix('vendor')->group(function() {
   Route::get('/service/edit/{id}', 'Vendor\ServiceController@edit')->name('vendor-service-edit');
   Route::post('/service/edit/{id}', 'Vendor\ServiceController@update')->name('vendor-service-update');  
   Route::get('/service/delete/{id}', 'Vendor\ServiceController@destroy')->name('vendor-service-delete'); 
-
-  Route::get('/pincode/datatables', 'Vendor\PincodeController@datatables')->name('vendor-pincode-datatables');
+   Route::get('/pincode/datatables', 'Vendor\PincodeController@datatables')->name('vendor-pincode-datatables');
   Route::get('/pincode', 'Vendor\PincodeController@index')->name('vendor-pincode-index');
   Route::get('/pincode/create', 'Vendor\PincodeController@create')->name('vendor-pincode-create');
   Route::post('/pincode/create', 'Vendor\PincodeController@store')->name('vendor-pincode-store');

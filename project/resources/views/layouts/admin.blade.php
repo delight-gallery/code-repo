@@ -216,6 +216,9 @@
 									<li>
 										<a href="{{ route('admin-report-payment') }}"><span>Payment Report</span></a>
 									</li>
+									<li>
+										<a href="{{ route('admin-report-pending-payment') }}"><span>Pending Payment Report</span></a>
+									</li>
 								</ul>
 							</li>
 							<li>
