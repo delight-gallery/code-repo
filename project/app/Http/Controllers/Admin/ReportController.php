@@ -21,7 +21,8 @@ class ReportController extends Controller
 
     public function payment()
     {
-    	return view('admin.report.payment');
+        $vendors = User::where('is_vendor','=',2)->orWhere('is_vendor','=',1)->orderBy('id','desc')->get();
+    	return view('admin.report.payment', compact('vendors'));
     }
 
     //*** JSON Request
@@ -39,6 +40,11 @@ class ReportController extends Controller
             parse_str($request->form, $form);
         }
         // print_r($form);
+        if (!empty($form['vendor'])) {
+            $order = $order->whereHas('vendororders.user', function ($query) use ($form) {
+                $query->where('users.shop_name', 'like', "%{$form['vendor']}%");
+            });
+        }
         if (empty($form['fromdate']) && empty($form['todate'])) {
             $order = $order->whereRaw('MONTH(created_at) = ?',[date('m')]);
         } else {

@@ -40,12 +40,22 @@
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="row">
-                                                        <div class="col-md-6">
+                                                    	<div class="col-md-4">
+	                                                    	<div class="form-group">
+		                                                        <select name="vendor" class="form-control">
+		                                                            <option value="">All Vendors</option>
+		                                                            @foreach ($vendors as $vendor)
+		                                                                <option value="{{ $vendor->shop_name }}">{{ $vendor->name }}</option>
+		                                                            @endforeach
+		                                                        </select>
+		                                                    </div>
+		                                                </div>
+                                                        <div class="col-md-4">
                                                             <div class="form-group">
                                                                 <input type="text" name="fromdate" class="form-control datepicker" placeholder="From date">
                                                             </div>
                                                         </div>
-                                                        <div class="col-md-6">
+                                                        <div class="col-md-4">
                                                             <div class="form-group">
                                                                 <input type="text" name="todate" class="form-control datepicker" placeholder="To date">
                                                             </div>
